@@ -56,7 +56,7 @@ function Index() {
           <nav className="hidden gap-7 text-sm font-medium text-ink-muted md:flex">
             {nav.map((n) => <a key={n.href} href={n.href} className="hover:text-primary">{n.label}</a>)}
           </nav>
-          <Button asChild size="sm" className="font-semibold"><a href="#planos">Quero conhecer os planos</a></Button>
+          <Button asChild size="sm" className="hidden font-semibold sm:inline-flex"><a href="#planos">Quero conhecer os planos</a></Button>
         </div>
       </header>
 
