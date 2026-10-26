@@ -126,7 +126,7 @@ export function LeadForm({ plan, onPlanChange }: { plan: string; onPlanChange: (
           {plans.map((p) => <option key={p.id} value={p.name}>{p.name}</option>)}
           <option value={CUSTOM_PLAN}>{CUSTOM_PLAN}</option>
         </select>
-        {errors.plan_interest && <p className="mt-1 text-sm text-destructive">{errors.plan_interest}</p>}
+        {errors["plan_interest"] && <p className="mt-1 text-sm text-destructive">{errors["plan_interest"]}</p>}
       </div>
       <div className="md:col-span-2">{field("goal", "Principal objetivo com as redes sociais *", { placeholder: "Ex.: ter uma frequência de posts", maxLength: 200 })}</div>
       <div className="md:col-span-2">
@@ -138,7 +138,7 @@ export function LeadForm({ plan, onPlanChange }: { plan: string; onPlanChange: (
           <Checkbox checked={!!form.consent} onCheckedChange={(c) => set("consent", c === true)} className="mt-0.5" />
           <span>Autorizo a ByJohwGimenes MKT a usar estes dados apenas para entrar em contato sobre esta solicitação. *</span>
         </label>
-        {errors.consent && <p className="mt-1 text-sm text-destructive">{errors.consent}</p>}
+        {errors["consent"] && <p className="mt-1 text-sm text-destructive">{errors["consent"]}</p>}
       </div>
       {submitError && <p className="text-sm text-destructive md:col-span-2">{submitError}</p>}
       <div className="md:col-span-2">
