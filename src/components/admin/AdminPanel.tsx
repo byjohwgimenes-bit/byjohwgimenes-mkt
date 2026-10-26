@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -184,7 +184,7 @@ function LeadDialog({ lead, onClose }: { lead: Lead; onClose: () => void }) {
       <DialogContent className="max-h-[90vh] overflow-y-auto">
         <DialogHeader><DialogTitle>{lead.name}</DialogTitle></DialogHeader>
         <dl className="grid grid-cols-3 gap-x-3 gap-y-2 text-sm">
-          {rows.map(([k, v]) => <><dt key={k + "k"} className="text-muted-foreground">{k}</dt><dd key={k} className="col-span-2 whitespace-pre-line">{v || "—"}</dd></>)}
+          {rows.map(([k, v]) => <Fragment key={k}><dt className="text-muted-foreground">{k}</dt><dd className="col-span-2 whitespace-pre-line">{v || "—"}</dd></Fragment>)}
         </dl>
         <div className="space-y-3">
           <div><Label>Status</Label>
