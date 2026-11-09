@@ -15,3 +15,9 @@
 - Lead→client conversion goes through the `convert_lead_to_client` DB function (one client per lead, unique `lead_id`). Why: prevents duplicates and retyping.
 - Public signup is disabled; the first user added via the Users panel claims admin on first sign-in via `claim_first_admin`. Why: no hard-coded admin credentials.
 - WhatsApp links are built only via `src/lib/whatsapp.ts`, which returns null without a valid configured number. Why: never show a broken or invented contact.
+
+- New briefings live in an additive private table with admin-only RLS; the narrow public server function validates and writes without exposing a read endpoint. Why: preserve legacy records and prevent public response access.
+- Submission UUIDs are retry keys, never public lookup keys; retries return only the reference after matching the full validated payload. Why: prevent duplicates without leaking another submission.
+- Briefing schema and conditional field definitions are shared by form, server and admin/PDF views. Why: validation and exported answers stay consistent.
+- PDF exports run client-side after admin RLS reads with an embedded Unicode font and omit internal notes. Why: selectable accented text without a public document endpoint.
+- Official full and symbol logos are optional slots in the shared public shell, rendered with object-contain only after supplied. Why: never fabricate brand assets.

@@ -1,0 +1,5 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { PublicShell } from '@/components/PublicShell';
+import { BriefingForm } from '@/components/briefing/BriefingForm';
+export const Route=createFileRoute('/briefing')({head:()=>({meta:[{title:'Briefing personalizado — ByJohwGimenes MKT'},{name:'description',content:'Conte sobre sua marca, objetivos e serviços desejados em um briefing personalizado para atendimento com Johw.'},{property:'og:title',content:'Briefing personalizado — ByJohwGimenes MKT'},{property:'og:description',content:'Compartilhe o ponto de partida do seu projeto com Johw.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary'}]}),component:BriefingPage});
+function BriefingPage(){return <PublicShell><div className="mx-auto max-w-3xl px-5 py-12 sm:py-16"><p className="mb-4 text-sm font-semibold text-primary">SEU PROJETO COMEÇA AQUI</p><h1 className="text-4xl font-bold">Briefing personalizado</h1><p className="mb-10 mt-4 text-muted-foreground">Vamos conhecer sua marca, suas necessidades e o que você quer construir.</p><BriefingForm/></div></PublicShell>}

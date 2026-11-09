@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "ByJohwGimenes MKT" },
-      { name: "description", content: "Planos de social media para pequenos negócios." },
+      { name: "description", content: "Branding, estratégia digital, conteúdo e produção audiovisual." },
     ],
     links: [
       {

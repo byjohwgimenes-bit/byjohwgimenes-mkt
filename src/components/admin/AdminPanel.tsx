@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { Briefings } from "./Briefings";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -61,12 +62,14 @@ export function AdminPanel({ email }: { email: string }) {
         <Tabs defaultValue="overview">
           <TabsList className="flex h-auto flex-wrap justify-start">
             <TabsTrigger value="overview">Visão geral</TabsTrigger>
+            <TabsTrigger value="briefings">Briefings</TabsTrigger>
             <TabsTrigger value="leads">Leads</TabsTrigger>
             <TabsTrigger value="clients">Clientes</TabsTrigger>
             <TabsTrigger value="deliveries">Entregas e lembretes</TabsTrigger>
             <TabsTrigger value="settings">Configurações</TabsTrigger>
           </TabsList>
           <TabsContent value="overview"><Overview /></TabsContent>
+          <TabsContent value="briefings"><Briefings /></TabsContent>
           <TabsContent value="leads"><Leads /></TabsContent>
           <TabsContent value="clients"><Clients /></TabsContent>
           <TabsContent value="deliveries"><Deliveries /></TabsContent>

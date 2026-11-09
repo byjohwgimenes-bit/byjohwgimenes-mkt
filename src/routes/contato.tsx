@@ -1,0 +1,7 @@
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { PublicShell, WhatsAppContact } from '@/components/PublicShell';
+import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query';
+import { settingsQuery } from '@/lib/site-data';
+export const Route=createFileRoute('/contato')({head:()=>({meta:[{title:'Contato com Johw — ByJohwGimenes MKT'},{name:'description',content:'Converse com Johw pelo WhatsApp ou envie um briefing personalizado sobre sua marca.'},{property:'og:title',content:'Contato — ByJohwGimenes MKT'},{property:'og:description',content:'Vamos conversar sobre o seu projeto.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary'}]}),component:ContactPage});
+function ContactPage(){const {data:s}=useQuery(settingsQuery);return <PublicShell><div className="mx-auto max-w-6xl px-5 py-20"><p className="mb-4 text-sm text-primary">VAMOS CONVERSAR</p><h1 className="max-w-3xl text-4xl font-bold sm:text-5xl">O que você quer construir com a sua marca?</h1><div className="mt-10 flex flex-wrap gap-4"><WhatsAppContact large/><Button asChild size="lg"><Link to="/briefing">Preencher briefing</Link></Button></div><div className="mt-12 space-y-3 text-muted-foreground">{s?.contact_email&&<a className="block" href={`mailto:${s.contact_email}`}>{s.contact_email}</a>}{s?.instagram&&<p>{s.instagram}</p>}</div></div></PublicShell>}

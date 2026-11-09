@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      briefings: {
+        Row: {
+          answers: Json
+          business_name: string
+          consent: boolean
+          created_at: string
+          id: string
+          internal_notes: string | null
+          name: string
+          reference: string
+          services: string[]
+          status: string
+          submission_key: string
+          updated_at: string
+        }
+        Insert: {
+          answers: Json
+          business_name: string
+          consent: boolean
+          created_at?: string
+          id?: string
+          internal_notes?: string | null
+          name: string
+          reference?: string
+          services: string[]
+          status?: string
+          submission_key: string
+          updated_at?: string
+        }
+        Update: {
+          answers?: Json
+          business_name?: string
+          consent?: boolean
+          created_at?: string
+          id?: string
+          internal_notes?: string | null
+          name?: string
+          reference?: string
+          services?: string[]
+          status?: string
+          submission_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       clients: {
         Row: {
           created_at: string

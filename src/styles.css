@@ -69,41 +69,41 @@
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.985 0.002 90);
+  --background: oklch(0.99 0 0);
   --foreground: oklch(0.2 0.005 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.2 0.005 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2 0.005 260);
-  --primary: oklch(0.86 0.17 92);
-  --primary-foreground: oklch(0.18 0.005 260);
+  --primary: oklch(0.55 0.22 27);
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.22 0.006 260);
   --secondary-foreground: oklch(0.97 0.003 90);
-  --muted: oklch(0.95 0.003 90);
+  --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.48 0.008 260);
-  --accent: oklch(0.95 0.06 95);
+  --accent: oklch(0.96 0.02 27);
   --accent-foreground: oklch(0.2 0.005 260);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(0.9 0.004 90);
   --input: oklch(0.88 0.004 90);
-  --ring: oklch(0.78 0.16 92);
+  --ring: oklch(0.55 0.22 27);
   --ink: oklch(0.17 0.005 260);
   --ink-foreground: oklch(0.96 0.003 90);
   --ink-muted: oklch(0.7 0.006 260);
-  --chart-1: oklch(0.86 0.17 92);
+  --chart-1: oklch(0.55 0.22 27);
   --chart-2: oklch(0.6 0.01 260);
   --chart-3: oklch(0.4 0.01 260);
-  --chart-4: oklch(0.75 0.1 92);
+  --chart-4: oklch(0.7 0.12 27);
   --chart-5: oklch(0.3 0.01 260);
   --sidebar: oklch(0.17 0.005 260);
   --sidebar-foreground: oklch(0.96 0.003 90);
-  --sidebar-primary: oklch(0.86 0.17 92);
-  --sidebar-primary-foreground: oklch(0.18 0.005 260);
+  --sidebar-primary: oklch(0.55 0.22 27);
+  --sidebar-primary-foreground: oklch(1 0 0);
   --sidebar-accent: oklch(0.25 0.006 260);
   --sidebar-accent-foreground: oklch(0.96 0.003 90);
   --sidebar-border: oklch(0.28 0.006 260);
-  --sidebar-ring: oklch(0.86 0.17 92);
+  --sidebar-ring: oklch(0.55 0.22 27);
   --shadow-pop: 6px 6px 0 0 var(--ink);
 }
 
@@ -130,5 +130,9 @@
 @layer base {
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-sans); }
-  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
 }
+
+.hero-scrim { background: linear-gradient(90deg, color-mix(in oklab, var(--ink) 98%, transparent), color-mix(in oklab, var(--ink) 83%, transparent) 45%, color-mix(in oklab, var(--ink) 15%, transparent)); }
+@media (max-width: 640px) { .hero-scrim { background: color-mix(in oklab, var(--ink) 88%, transparent); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
