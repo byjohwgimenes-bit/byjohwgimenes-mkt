@@ -6,8 +6,7 @@ import { settingsQuery } from '@/lib/site-data';
 import { whatsappLink } from '@/lib/whatsapp';
 import type { ReactNode } from 'react';
 
-// Official assets only. Add imported fullLogo/symbol URLs here after the user's upload.
-const officialLogos: {full:string|null;symbol:string|null}={full:null,symbol:null};
+import { officialLogos } from '@/assets/official-logos';
 export function Brand({symbol=false}:{symbol?:boolean}) {
  const src=symbol?officialLogos.symbol:officialLogos.full;
   return src?<img src={src} alt="ByJohwGimenes." className={symbol?'max-h-12 w-12 object-contain':'max-h-12 max-w-60 object-contain'} />:<span className="text-base font-bold sm:text-lg">ByJohwGimenes.</span>;
