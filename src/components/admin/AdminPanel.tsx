@@ -1,5 +1,6 @@
 import { Fragment, useState } from "react";
 import { Briefings } from "./Briefings";
+import { DeleteRecordButton } from "./DeleteRecordButton";
 import { BRIEFING_STATUS, SERVICES } from "@/lib/briefing";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -211,8 +212,9 @@ function Deliveries() {
     onSuccess: () => qc.invalidateQueries({ queryKey: ["admin"] }),
   });
   const remove = useMutation({
-    mutationFn: async (id: string) => { const { error } = await supabase.from("deliveries").delete().eq("id", id); if (error) throw error; },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["admin"] }),
+    mutationFn: async (id: string) => { const { data, error } = await supabase.from("deliveries").delete().eq("id", id).select("id").single(); if (error) throw error; if (!data) throw new Error("not_found"); },
+    onSuccess: () => { toast.success("Projeto ou entrega excluído"); qc.invalidateQueries({ queryKey: ["admin"] }); },
+    onError: () => toast.error("Não foi possível excluir o item. Atualize a lista e tente novamente."),
   });
   return (
     <div className="mt-6 space-y-6">
@@ -251,7 +253,7 @@ function Deliveries() {
                   <select className={sel} value={d.status} onChange={(e) => setStatus.mutate({ id: d.id, status: e.target.value as DeliveryStatus })}>
                     {Object.entries(DELIVERY_STATUS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
                   </select>
-                  <Button size="sm" variant="ghost" onClick={() => confirm("Excluir este item?") && remove.mutate(d.id)}>Excluir</Button>
+                  <DeleteRecordButton label="Excluir item" description={`Excluir o projeto, entrega ou lembrete “${d.description}”? O cliente e o briefing serão preservados.`} disabled={remove.isPending} onDelete={() => remove.mutateAsync(d.id)} />
                 </div>
               </li>
             ))}
