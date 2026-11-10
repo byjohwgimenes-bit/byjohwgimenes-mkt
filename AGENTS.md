@@ -21,3 +21,7 @@
 - Briefing schema and conditional field definitions are shared by form, server and admin/PDF views. Why: validation and exported answers stay consistent.
 - PDF exports run client-side after admin RLS reads with an embedded Unicode font and omit internal notes. Why: selectable accented text without a public document endpoint.
 - Official full and symbol logos are optional slots in the shared public shell, rendered with object-contain only after supplied. Why: never fabricate brand assets.
+- Briefing conversion uses the admin-checked atomic `convert_briefing_to_client` RPC and unique `clients.briefing_id`; the legacy required lead link is populated only as a compatibility bridge. Why: preserve historical clients and prevent concurrent duplicate conversion without inferring contracted services.
+- Contracted services are explicitly selected per delivery, not copied from briefing interests. Why: an inquiry is not a contract.
+- Public content has independent leaf routes; case detail uses an unnested route. Why: each page needs shareable metadata and independent rendering.
+- System typography and the existing palette are provisional pending official materials; optional portrait and gallery slots stay empty. Why: never represent invented assets as authorized branding.

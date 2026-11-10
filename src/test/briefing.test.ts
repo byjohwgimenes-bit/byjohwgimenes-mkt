@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { ALL_FIELDS, SERVICES, briefingSchema, cleanBriefing, selectedGroups, briefingMessage } from '@/lib/briefing';
 import { whatsappLink } from '@/lib/whatsapp';
-const valid=()=>({submission_key:'00000000-0000-4000-8000-000000000001',services:[SERVICES[0],SERVICES[11]],answers:{...Object.fromEntries(ALL_FIELDS.map(f=>[f.key,''])),name:'TESTE João',business_name:'TESTE Açúcar',whatsapp:'(11) 99999-0000',city:'Suzano',state:'SP',business:'Confeitaria artesanal',audience:'Preciso de ajuda',goal:'Organizar a marca',difficulty:'Comunicação inconsistente',identity:'Parcial',start:'Tenho data',start_date:'2026-12-01'},consent:true});
+const valid=()=>({submission_key:'00000000-0000-4000-8000-000000000001',services:[SERVICES[0],SERVICES[10]],answers:{...Object.fromEntries(ALL_FIELDS.map(f=>[f.key,''])),name:'TESTE João',business_name:'TESTE Açúcar',whatsapp:'(11) 99999-0000',city:'Suzano',state:'SP',business:'Confeitaria artesanal',audience:'Preciso de ajuda',goal:'Organizar a marca',difficulty:'Comunicação inconsistente',identity:'Parcial',start:'Tenho data',start_date:'2026-12-01'},consent:true});
 describe('Briefing rules',()=>{
  it('requires at least one service',()=>expect(briefingSchema.safeParse({...valid(),services:[]}).success).toBe(false));
  it('allows orientation with other services',()=>expect(briefingSchema.safeParse(valid()).success).toBe(true));
@@ -10,7 +10,8 @@ describe('Briefing rules',()=>{
  it('requires date only for a dated start',()=>{expect(briefingSchema.safeParse({...valid(),answers:{...valid().answers,start_date:''}}).success).toBe(false);expect(briefingSchema.safeParse({...valid(),answers:{...valid().answers,start:'Estou pesquisando',start_date:''}}).success).toBe(true);});
  it('rejects malformed dates without throwing',()=>expect(briefingSchema.safeParse({...valid(),answers:{...valid().answers,start_date:'2026-99-99'}}).success).toBe(false));
  it('rejects invalid phone and email',()=>{expect(briefingSchema.safeParse({...valid(),answers:{...valid().answers,whatsapp:'1234567890abc'}}).success).toBe(false);expect(briefingSchema.safeParse({...valid(),answers:{...valid().answers,email:'invalid'}}).success).toBe(false);});
- it('never duplicates questions shared by services',()=>{expect(selectedGroups([SERVICES[1],SERVICES[2]]).length).toBe(1);expect(selectedGroups([SERVICES[5],SERVICES[6]]).length).toBe(1);expect(selectedGroups([SERVICES[9],SERVICES[10]]).length).toBe(1);});
+ it('never duplicates questions shared by services',()=>{expect(selectedGroups([SERVICES[1],SERVICES[2]]).length).toBe(1);expect(selectedGroups([SERVICES[6],SERVICES[7]]).length).toBe(1);expect(selectedGroups([SERVICES[8],SERVICES[9]]).length).toBe(1);});
+ it('rejects photography for new briefings',()=>expect(briefingSchema.safeParse({...valid(),services:['Fotografia']}).success).toBe(false));
  it('removes hidden answers before storage',()=>{const d=briefingSchema.parse({...valid(),answers:{...valid().answers,start:'Estou pesquisando',ads_product:'Hidden'}});const clean=cleanBriefing(d);expect(clean.answers['ads_product']).toBeUndefined();expect(clean.answers['start_date']).toBeUndefined();});
  it('limits WhatsApp message to name company reference and services',()=>{const d=valid();const msg=briefingMessage(d.answers.name,d.answers.business_name,'BJ-TEST',d.services);expect(msg).toBe('Olá, Johw! Sou TESTE João, da TESTE Açúcar. Preenchi o briefing nº BJ-TEST para os serviços de Branding e identidade visual, Ainda não sei—preciso de orientação. Gostaria de conversar sobre meu projeto.');const link=whatsappLink('+55 (11) 99999-0000',msg);expect(decodeURIComponent(link ?? '')).not.toContain(d.answers.difficulty);expect(link).toContain('Jo%C3%A3o');});
 });

@@ -12,10 +12,10 @@ export const Route = createFileRoute("/admin")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Painel administrativo — ByJohwGimenes MKT" },
-      { name: "description", content: "Área restrita da ByJohwGimenes MKT." },
+      { title: "Painel administrativo — ByJohwGimenes." },
+      { name: "description", content: "Área restrita da ByJohwGimenes.." },
       { name: "robots", content: "noindex, nofollow" },
-      { property: "og:title", content: "Painel — ByJohwGimenes MKT" },
+      { property: "og:title", content: "Painel — ByJohwGimenes." },
       { property: "og:description", content: "Área restrita." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

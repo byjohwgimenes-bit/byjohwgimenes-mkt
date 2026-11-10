@@ -18,11 +18,11 @@ export async function createBriefingPdf(data:{reference:string;services:readonly
    line(current,size);
   }
  };
- wrap('ByJohwGimenes MKT',18); wrap('Briefing de projeto',14); wrap(data.reference);wrap(new Date(data.created_at).toLocaleString('pt-BR'));y-=12;
+ wrap('ByJohwGimenes.',18); wrap('Briefing de projeto',14); wrap(data.reference);wrap(new Date(data.created_at).toLocaleString('pt-BR'));y-=12;
  const rows:[string,string][]=[['Serviços',data.services.join(', ')],...briefingRows(data.services,data.answers)];
  for(const [label,value] of rows){if(y<110){page=doc.addPage([595.28,841.89]);y=790;}wrap(label,11);wrap(value);y-=12;}
  doc.getPages().forEach((p,i)=>p.drawText(`${i+1} / ${doc.getPageCount()}`,{x:48,y:32,size:9,font}));
- doc.setTitle(`Briefing ${data.reference} — ByJohwGimenes MKT`);
+ doc.setTitle(`Briefing ${data.reference} — ByJohwGimenes.`);
  return doc.save();
 }
 export async function downloadBriefingPdf(data:Parameters<typeof createBriefingPdf>[0]) {

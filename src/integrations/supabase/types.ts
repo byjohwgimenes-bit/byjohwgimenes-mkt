@@ -61,6 +61,7 @@ export type Database = {
       }
       clients: {
         Row: {
+          briefing_id: string | null
           created_at: string
           id: string
           lead_id: string
@@ -71,6 +72,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          briefing_id?: string | null
           created_at?: string
           id?: string
           lead_id: string
@@ -81,6 +83,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          briefing_id?: string | null
           created_at?: string
           id?: string
           lead_id?: string
@@ -91,6 +94,13 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "clients_briefing_id_fkey"
+            columns: ["briefing_id"]
+            isOneToOne: false
+            referencedRelation: "briefings"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "clients_lead_id_fkey"
             columns: ["lead_id"]
@@ -108,6 +118,7 @@ export type Database = {
           due_date: string | null
           id: string
           notes: string | null
+          services: string[]
           status: Database["public"]["Enums"]["delivery_status"]
           updated_at: string
         }
@@ -118,6 +129,7 @@ export type Database = {
           due_date?: string | null
           id?: string
           notes?: string | null
+          services?: string[]
           status?: Database["public"]["Enums"]["delivery_status"]
           updated_at?: string
         }
@@ -128,6 +140,7 @@ export type Database = {
           due_date?: string | null
           id?: string
           notes?: string | null
+          services?: string[]
           status?: Database["public"]["Enums"]["delivery_status"]
           updated_at?: string
         }
@@ -273,6 +286,10 @@ export type Database = {
     }
     Functions: {
       claim_first_admin: { Args: never; Returns: boolean }
+      convert_briefing_to_client: {
+        Args: { _briefing_id: string }
+        Returns: string
+      }
       convert_lead_to_client: { Args: { _lead_id: string }; Returns: string }
       has_role: {
         Args: {

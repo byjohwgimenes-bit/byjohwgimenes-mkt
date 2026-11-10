@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BriefingRouteImport } from './routes/briefing'
+import { Route as CasesRouteImport } from './routes/cases'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as SobreMimRouteImport } from './routes/sobre-mim'
+import { Route as CasesNajarImoveisRouteImport } from './routes/cases_.najar-imoveis'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,6 +33,11 @@ const BriefingRoute = BriefingRouteImport.update({
   path: '/briefing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CasesRoute = CasesRouteImport.update({
+  id: '/cases',
+  path: '/cases',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
@@ -40,43 +48,90 @@ const ServicosRoute = ServicosRouteImport.update({
   path: '/servicos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SobreMimRoute = SobreMimRouteImport.update({
+  id: '/sobre-mim',
+  path: '/sobre-mim',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasesNajarImoveisRoute = CasesNajarImoveisRouteImport.update({
+  id: '/cases_/najar-imoveis',
+  path: '/cases/najar-imoveis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/briefing': typeof BriefingRoute
+  '/cases': typeof CasesRoute
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
+  '/sobre-mim': typeof SobreMimRoute
+  '/cases/najar-imoveis': typeof CasesNajarImoveisRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/briefing': typeof BriefingRoute
+  '/cases': typeof CasesRoute
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
+  '/sobre-mim': typeof SobreMimRoute
+  '/cases/najar-imoveis': typeof CasesNajarImoveisRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/briefing': typeof BriefingRoute
+  '/cases': typeof CasesRoute
   '/contato': typeof ContatoRoute
   '/servicos': typeof ServicosRoute
+  '/sobre-mim': typeof SobreMimRoute
+  '/cases_/najar-imoveis': typeof CasesNajarImoveisRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/briefing' | '/contato' | '/servicos'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/briefing'
+    | '/cases'
+    | '/contato'
+    | '/servicos'
+    | '/sobre-mim'
+    | '/cases/najar-imoveis'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/briefing' | '/contato' | '/servicos'
-  id: '__root__' | '/' | '/admin' | '/briefing' | '/contato' | '/servicos'
+  to:
+    | '/'
+    | '/admin'
+    | '/briefing'
+    | '/cases'
+    | '/contato'
+    | '/servicos'
+    | '/sobre-mim'
+    | '/cases/najar-imoveis'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/briefing'
+    | '/cases'
+    | '/contato'
+    | '/servicos'
+    | '/sobre-mim'
+    | '/cases_/najar-imoveis'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   BriefingRoute: typeof BriefingRoute
+  CasesRoute: typeof CasesRoute
   ContatoRoute: typeof ContatoRoute
   ServicosRoute: typeof ServicosRoute
+  SobreMimRoute: typeof SobreMimRoute
+  CasesNajarImoveisRoute: typeof CasesNajarImoveisRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -102,6 +157,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BriefingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cases': {
+      id: '/cases'
+      path: '/cases'
+      fullPath: '/cases'
+      preLoaderRoute: typeof CasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contato': {
       id: '/contato'
       path: '/contato'
@@ -116,6 +178,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sobre-mim': {
+      id: '/sobre-mim'
+      path: '/sobre-mim'
+      fullPath: '/sobre-mim'
+      preLoaderRoute: typeof SobreMimRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cases_/najar-imoveis': {
+      id: '/cases_/najar-imoveis'
+      path: '/cases/najar-imoveis'
+      fullPath: '/cases/najar-imoveis'
+      preLoaderRoute: typeof CasesNajarImoveisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -123,8 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   BriefingRoute: BriefingRoute,
+  CasesRoute: CasesRoute,
   ContatoRoute: ContatoRoute,
   ServicosRoute: ServicosRoute,
+  SobreMimRoute: SobreMimRoute,
+  CasesNajarImoveisRoute: CasesNajarImoveisRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

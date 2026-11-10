@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const SERVICES = ['Branding e identidade visual', 'Gestão de redes sociais', 'Criação de conteúdo para redes sociais', 'Design gráfico', 'Perfil da Empresa no Google', 'Fotografia', 'Captação de vídeos/Videomaker', 'Edição de vídeos', 'Edição de imagens', 'Meta Ads', 'Google Ads', 'Ainda não sei—preciso de orientação'] as const;
+export const SERVICES = ['Branding e identidade visual', 'Gestão de redes sociais', 'Criação de conteúdo para redes sociais', 'Design gráfico', 'Perfil da Empresa no Google', 'Captação de vídeos/Videomaker', 'Edição de vídeos', 'Edição de imagens', 'Meta Ads', 'Google Ads', 'Ainda não sei—preciso de orientação'] as const;
 export const BRIEFING_STATUS = { novo: 'Novo', em_atendimento: 'Em atendimento', proposta_enviada: 'Proposta enviada', fechado: 'Fechado', nao_avancou: 'Não avançou' } as const;
 export type Field = { key: string; label: string; required?: boolean; options?: string[]; type?: string; long?: boolean; max?: number };
 export const CONTACT_FIELDS: Field[] = [
@@ -15,9 +15,9 @@ export const SPECIFIC_GROUPS: {title:string; services: readonly string[]; fields
  {title:'Redes sociais e conteúdo',services:[SERVICES[1],SERVICES[2]],fields:[{key:'social_channels',label:'Quais canais deseja trabalhar?'},{key:'social_support',label:'Que apoio precisa na gestão e no conteúdo?',long:true}]},
  {title:'Design gráfico',services:[SERVICES[3]],fields:[{key:'design_pieces',label:'Quais peças deseja criar?',long:true}]},
  {title:'Perfil da Empresa no Google',services:[SERVICES[4]],fields:[{key:'google_existing',label:'Já tem um perfil da empresa?',options:['Sim','Não','Não sei']},{key:'google_need',label:'O que precisa no perfil?',long:true}]},
- {title:'Fotografia e captação',services:[SERVICES[5],SERVICES[6]],fields:[{key:'capture_subject',label:'O que será fotografado ou filmado?'},{key:'capture_location',label:'Local da produção'},{key:'capture_date',label:'Data prevista da produção',type:'date'}]},
- {title:'Edição de vídeos e imagens',services:[SERVICES[7],SERVICES[8]],fields:[{key:'edit_material',label:'Quais materiais já possui?'},{key:'edit_use',label:'Onde e como o material será usado?',long:true}]},
- {title:'Meta Ads e Google Ads',services:[SERVICES[9],SERVICES[10]],fields:[{key:'ads_experience',label:'Já anunciou antes?',options:['Sim','Não']},{key:'ads_product',label:'Qual produto ou oferta deseja anunciar?'},{key:'ads_media_budget',label:'Verba de mídia (separada do valor do serviço)',max:200}]},
+ {title:'Captação de vídeos',services:[SERVICES[5]],fields:[{key:'capture_subject',label:'O que será filmado?'},{key:'capture_location',label:'Local da produção'},{key:'capture_date',label:'Data prevista da produção',type:'date'}]},
+ {title:'Edição de vídeos e imagens',services:[SERVICES[6],SERVICES[7]],fields:[{key:'edit_material',label:'Quais materiais já possui?'},{key:'edit_use',label:'Onde e como o material será usado?',long:true}]},
+ {title:'Meta Ads e Google Ads',services:[SERVICES[8],SERVICES[9]],fields:[{key:'ads_experience',label:'Já anunciou antes?',options:['Sim','Não']},{key:'ads_product',label:'Qual produto ou oferta deseja anunciar?'},{key:'ads_media_budget',label:'Verba de mídia (separada do valor do serviço)',max:200}]},
 ];
 export const ALL_FIELDS = [...CONTACT_FIELDS,...PROJECT_FIELDS,...SPECIFIC_GROUPS.flatMap(g=>g.fields)];
 const shape = Object.fromEntries(ALL_FIELDS.map(f=>[f.key,z.string().trim().max(f.max ?? 1500).default('')]));
@@ -49,7 +49,10 @@ export function cleanBriefing(d:BriefingInput): BriefingInput {
  return {...d,answers:Object.fromEntries(Object.entries(d.answers).filter(([key])=>allowed.has(key)))};
 }
 export function briefingRows(services:readonly string[],answers:Record<string,string>) {
- return [...CONTACT_FIELDS,...visibleProjectFields(answers),...selectedGroups(services).flatMap(g=>g.fields)].map(f=>[f.label,answers[f.key] || 'Não informado'] as [string,string]);
+ const fields=[...CONTACT_FIELDS,...visibleProjectFields(answers),...selectedGroups(services).flatMap(g=>g.fields)];
+ // Historical photography responses remain readable, without accepting new photography submissions.
+ if(services.includes('Fotografia') && !services.includes(SERVICES[5])) fields.push(...(SPECIFIC_GROUPS.find(g=>g.title==='Captação de vídeos')?.fields ?? []));
+ return fields.map(f=>[f.key==='capture_subject'&&services.includes('Fotografia')?'Assunto da produção':f.label,answers[f.key] || 'Não informado'] as [string,string]);
 }
 export function briefingMessage(name:string,business:string,reference:string,services:readonly string[]) {
  return `Olá, Johw! Sou ${name}, da ${business}. Preenchi o briefing nº ${reference} para os serviços de ${services.join(', ')}. Gostaria de conversar sobre meu projeto.`;

@@ -62,8 +62,8 @@
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
-  --font-display: "Archivo", ui-sans-serif, sans-serif;
-  --font-sans: "Manrope", ui-sans-serif, sans-serif;
+  --font-display: Impact, "Arial Narrow", ui-sans-serif, sans-serif;
+  --font-sans: Arial, ui-sans-serif, sans-serif;
   --shadow-pop: var(--shadow-pop);
 }
 
@@ -136,3 +136,13 @@
 .hero-scrim { background: linear-gradient(90deg, color-mix(in oklab, var(--ink) 98%, transparent), color-mix(in oklab, var(--ink) 83%, transparent) 45%, color-mix(in oklab, var(--ink) 15%, transparent)); }
 @media (max-width: 640px) { .hero-scrim { background: color-mix(in oklab, var(--ink) 88%, transparent); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+/* Provisional existing palette and system fonts; replace only upon official manual delivery. */
+.editorial-cover { position: relative; background: var(--primary); min-height: 530px; overflow: hidden; }
+.editorial-paper { position: absolute; inset: 22px 22px 22px 45%; border-radius: 48px 8px 8px 48px; background: var(--background); }
+.editorial-curves { position: absolute; width: 650px; height: 650px; left: -360px; top: -90px; border: 1px solid color-mix(in oklab, var(--primary-foreground) 25%, transparent); border-radius: 50%; box-shadow: 0 0 0 45px color-mix(in oklab, var(--primary-foreground) 8%, transparent), 0 0 0 90px color-mix(in oklab, var(--primary-foreground) 5%, transparent); }
+.editorial-title { font-family: var(--font-display); font-stretch: condensed; font-size: 152px; line-height: .95; letter-spacing: 0; }
+.editorial-copy { position: relative; margin-left: 48%; max-width: 500px; padding: 80px 0; }
+.editorial-kicker { position: absolute; top: 56px; left: 5%; color: var(--primary-foreground); writing-mode: vertical-rl; font-size: 12px; }
+@media(max-width: 767px) { .editorial-cover { min-height: auto; padding: 20px; } .editorial-paper { inset: 100px 12px 12px; border-radius: 30px 8px 8px; } .editorial-copy { margin-left: 0; padding: 110px 10px 38px; } .editorial-title { font-size: 112px; } .editorial-kicker { top: 34px; left: 30px; writing-mode: horizontal-tb; } }
+a, button { transition: color .18s ease, background-color .18s ease; }
