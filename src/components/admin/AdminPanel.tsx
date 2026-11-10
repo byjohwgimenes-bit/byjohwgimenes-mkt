@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogTitle, AlertDialogDescription, AlertDialogFooter, AlertDialogCancel, AlertDialogAction } from "@/components/ui/alert-dialog";
 import { settingsQuery } from "@/lib/site-data";
 
 type Lead = Database["public"]["Tables"]["leads"]["Row"];
@@ -122,17 +123,27 @@ function Clients() {
     onSuccess: () => { toast.success("Cliente atualizado"); qc.invalidateQueries({ queryKey: ["admin"] }); },
     onError: () => toast.error("Não foi possível salvar"),
   });
+  const remove = useMutation({
+    mutationFn: async (id: string) => {
+      const { data, error } = await supabase.from("clients").delete().eq("id", id).select("id").single();
+      if (error) throw error;
+      if (!data) throw new Error("Cliente não encontrado ou acesso negado");
+    },
+    onSuccess: () => { toast.success("Cliente excluído"); qc.invalidateQueries({ queryKey: ["admin"] }); },
+    onError: () => toast.error("Não foi possível excluir o cliente. Atualize a lista e tente novamente."),
+  });
   if (isLoading) return <p className="mt-6 text-sm">Carregando…</p>;
   if (clients.length === 0) return <p className="mt-6 rounded-lg border bg-card p-5 text-sm text-muted-foreground">Nenhum cliente ainda. Converta um briefing na aba Briefings.</p>;
   return (
     <div className="mt-6 grid gap-4 md:grid-cols-2">
-      {clients.map((c) => <ClientCard key={c.id} c={c} onSave={(v) => update.mutate({ id: c.id, ...v })} />)}
+      {clients.map((c) => <ClientCard key={c.id} c={c} deleting={remove.isPending} onDelete={() => remove.mutateAsync(c.id)} onSave={(v) => update.mutate({ id: c.id, ...v })} />)}
     </div>
   );
 }
 
 type ClientRow = ReturnType<typeof useClients>["data"] extends (infer T)[] | undefined ? T : never;
-function ClientCard({ c, onSave }: { c: ClientRow; onSave: (v: { plan: string | null; start_date: string | null; status: ClientStatus; notes: string | null }) => void }) {
+function ClientCard({ c, onSave, onDelete, deleting }: { c: ClientRow; onDelete: () => Promise<unknown>; deleting: boolean; onSave: (v: { plan: string | null; start_date: string | null; status: ClientStatus; notes: string | null }) => void }) {
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const plan = c.plan ?? "";
   const [start, setStart] = useState(c.start_date ?? "");
   const [status, setStatus] = useState<ClientStatus>(c.status);
@@ -153,7 +164,27 @@ function ClientCard({ c, onSave }: { c: ClientRow; onSave: (v: { plan: string | 
         </select>
       </div>
       <div><Label>Observações internas</Label><Textarea className="mt-1.5" rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} /></div>
-      <Button size="sm" onClick={() => onSave({ plan: plan || null, start_date: start || null, status, notes: notes || null })}>Salvar</Button>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Button size="sm" disabled={deleting} onClick={() => onSave({ plan: plan || null, start_date: start || null, status, notes: notes || null })}>Salvar</Button>
+        <AlertDialog open={deleteOpen} onOpenChange={(open) => { if (!deleting) setDeleteOpen(open); }}>
+          <AlertDialogTrigger asChild><Button size="sm" variant="destructive" disabled={deleting}>Excluir cliente</Button></AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Excluir este cliente?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Você vai excluir {c.briefing?.business_name ?? c.lead?.business_name ?? "este cliente"} e todas as entregas e lembretes vinculados a ele. O briefing original será preservado. Esta ação não pode ser desfeita.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel disabled={deleting}>Cancelar</AlertDialogCancel>
+              <AlertDialogAction disabled={deleting} className="bg-destructive text-destructive-foreground hover:bg-destructive/90" onClick={async (event) => {
+                event.preventDefault();
+                try { await onDelete(); setDeleteOpen(false); } catch { /* Mutation displays the error; keep confirmation open for retry. */ }
+              }}>{deleting ? "Excluindo…" : "Confirmar exclusão"}</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   );
 }
