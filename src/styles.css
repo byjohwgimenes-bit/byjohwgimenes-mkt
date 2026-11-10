@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./assets/codec-pro.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -62,8 +63,8 @@
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
-  --font-display: Impact, "Arial Narrow", ui-sans-serif, sans-serif;
-  --font-sans: Arial, ui-sans-serif, sans-serif;
+  --font-display: "Codec Pro", Arial, ui-sans-serif, sans-serif;
+  --font-sans: "Codec Pro", Arial, ui-sans-serif, sans-serif;
   --shadow-pop: var(--shadow-pop);
 }
 
