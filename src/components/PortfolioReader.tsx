@@ -39,7 +39,7 @@ export function PortfolioReader({ project }: { project: Project }) {
     async function load() {
       try {
         const [engine, worker] = await Promise.all([
-          import('pdfjs-dist/build/pdf.mjs'),
+          import('pdfjs-dist'),
           import('pdfjs-dist/build/pdf.worker.min.mjs?url'),
         ]);
         if (disposed) return;
@@ -49,8 +49,9 @@ export function PortfolioReader({ project }: { project: Project }) {
         const data = new Uint8Array(await response.arrayBuffer());
         if (data.byteLength !== project.bytes || new TextDecoder().decode(data.subarray(0, 5)) !== '%PDF-') throw new Error('Incomplete PDF');
         if (disposed) return;
-        task = engine.getDocument({ data, isEvalSupported: false, useWasm: false });
-        const document = await task.promise;
+        const loadingTask = engine.getDocument({ data, useWasm: false });
+        task = loadingTask;
+        const document = await loadingTask.promise;
         if (disposed) return;
         if (document.numPages !== project.pages) throw new Error('Unexpected page count');
         setPdf(document);
