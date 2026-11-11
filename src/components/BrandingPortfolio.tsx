@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ORIGINAL_PDFS, PORTFOLIO } from '@/lib/portfolio';
+import { PORTFOLIO } from '@/lib/portfolio';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import { PortfolioReader } from '@/components/PortfolioReader';
 
 export function BrandingPortfolio({ number }: { number: string }) {
   const [open, setOpen] = useState(false);
@@ -26,9 +28,10 @@ export function BrandingPortfolio({ number }: { number: string }) {
               <h3 className="text-xl font-semibold">{project.name}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
               <p className="mb-4 mt-4 text-xs text-muted-foreground">{project.pages} {project.pages === 1 ? 'página' : 'páginas'} · {project.size}</p>
-              <Button asChild variant="outline" className="mt-auto w-full">
-                <a href={ORIGINAL_PDFS[project.slug].url} target="_blank" rel="noopener noreferrer" aria-label={`Ver PDF original de ${project.name} (nova aba)`}>Ver PDF original<ArrowUpRight aria-hidden="true" /></a>
-              </Button>
+              <Dialog>
+                <DialogTrigger asChild><Button variant="outline" className="mt-auto w-full" aria-label={`Ver projeto de ${project.name}`}>Ver projeto<ArrowUpRight aria-hidden="true" /></Button></DialogTrigger>
+                <PortfolioReader project={project} />
+              </Dialog>
             </div>
           </article>)}
         </div>

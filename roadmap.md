@@ -1,4 +1,5 @@
 # Atualização consolidada ByJohwGimenes.
+- [ ] Corrigir e testar leitor interno dos seis projetos de branding, navegação, zoom e celular; sem publicar.
 - [x] Integrar somente os seis PDFs originais autorizados em Serviços, com capas reais, integridade e testes no preview; sem publicar.
 - [ ] Revisar e completar páginas Início, Sobre mim, Serviços, Cases, Briefing e Contato.
 - [ ] Retirar fotografia dos novos briefings preservando histórico; validar fluxo existente.
