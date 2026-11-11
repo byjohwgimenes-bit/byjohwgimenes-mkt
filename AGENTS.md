@@ -10,6 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Architecture rules
+- Authorized portfolio PDFs stay byte-identical in permanent Lovable Assets with committed pointers; a shared manifest pairs originals with first-page covers, and native disclosure mounts only lazy covers, never prefetching PDFs. Why: repository size limits, durable originals and lightweight browsing; verify SHA256 against uploads after storage.
 - Admin access is checked in the database (`has_role`, RLS on every table); the `/admin` page is client-only and only a UI gate. Why: hiding a page is not security.
 - Public visitors may only INSERT leads (status forced to `novo`); they read only `plans` and `site_settings`. Why: lead/client data must stay admin-only.
 - Lead→client conversion goes through the `convert_lead_to_client` DB function (one client per lead, unique `lead_id`). Why: prevents duplicates and retyping.
