@@ -26,3 +26,5 @@
 - Contracted services are explicitly selected per delivery, not copied from briefing interests. Why: an inquiry is not a contract.
 - Public content has independent leaf routes; case detail uses an unnested route. Why: each page needs shareable metadata and independent rendering.
 - System typography and the existing palette are provisional pending official materials; optional portrait and gallery slots stay empty. Why: never represent invented assets as authorized branding.
+
+- The dark home presentation is opt-in through PublicShell appearance and scoped CSS; other pages retain their styles. Why: home redesigns must not affect galleries, forms or admin.
