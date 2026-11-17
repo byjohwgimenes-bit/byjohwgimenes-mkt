@@ -28,3 +28,5 @@
 - System typography and the existing palette are provisional pending official materials; optional portrait and gallery slots stay empty. Why: never represent invented assets as authorized branding.
 
 - The dark home presentation is opt-in through PublicShell appearance and scoped CSS; other pages retain their styles. Why: home redesigns must not affect galleries, forms or admin.
+
+- Netlify uses the Nitro netlify preset with publish directory dist and generated server functions; preserve the default Lovable preview build. Portfolio covers reference local JPEG pages so external hosting does not depend on Lovable asset proxy routes. Why: portable SSR and assets without changing backend permissions.
