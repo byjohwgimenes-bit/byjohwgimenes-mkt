@@ -37,6 +37,15 @@ const additionalDescriptions: Record<string, string> = {
     "Planejo e gerencio anúncios no Instagram e no Facebook para aproximar sua oferta do público desejado, de acordo com os objetivos e a verba de cada projeto.",
 };
 const serviceDescriptions: Record<string, { intro: string; items: string[] }> = {
+  [SERVICES[8]]: {
+    intro: "Planejo e gerencio anúncios no Instagram e no Facebook com estratégias construídas a partir das necessidades da sua empresa, dos objetivos da campanha e do público que você deseja alcançar.",
+    items: [
+      "Planejamento e estruturação de estratégias personalizadas conforme as necessidades da empresa ou do cliente.",
+      "Criação e gestão de campanhas com as ferramentas do Meta Business.",
+      "Acompanhamento contínuo do desempenho dos anúncios.",
+      "Relatórios de anúncios para apresentar os resultados e orientar os próximos ajustes.",
+    ],
+  },
   [SERVICES[3]]: {
     intro:
       "Design que dá forma à sua mensagem. Crio peças visuais que valorizam sua marca, apresentam suas ofertas com clareza e mantêm uma comunicação consistente em cada ponto de contato.",
