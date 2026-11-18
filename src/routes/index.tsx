@@ -51,6 +51,25 @@ function Index() {
         <div><p className="brand-eyebrow font-bold">CASE EM DESTAQUE</p><h2 id="case-title" className="font-bold">Najar Imóveis</h2><p>Estratégia de marketing e criação visual nas redes sociais desde agosto de 2022.</p></div>
         <Link className="brand-text-link" to="/cases/najar-imoveis">Conhecer o case <ArrowUpRight size={18}/></Link>
       </section>
+      <section aria-labelledby="work-process-title" className="mt-12 border-t border-white/15 pt-10">
+        <p className="brand-eyebrow font-bold text-primary">DO PRIMEIRO CONTATO À ENTREGA</p>
+        <h2 id="work-process-title" className="mt-3 text-3xl font-bold sm:text-4xl">Como funciona meu trabalho</h2>
+        <p className="mt-4 max-w-2xl leading-relaxed text-white/70">Cada projeto começa com uma conversa sobre o que sua marca precisa. Veja como construímos esse caminho juntos.</p>
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {[
+            {title: 'Briefing', description: 'Você apresenta seu negócio, seus objetivos e os serviços de que precisa.'},
+            {title: 'Conversa', description: 'Conversamos para esclarecer dúvidas e entender as prioridades do projeto.'},
+            {title: 'Proposta', description: 'Definimos as entregas, o investimento e os prazos de acordo com a sua necessidade.'},
+            {title: 'Criação', description: 'Desenvolvo a estratégia e os materiais conforme o escopo aprovado, com alinhamentos ao longo do processo.'},
+            {title: 'Entrega', description: 'Você recebe os materiais ou acompanha os serviços contratados, conforme o combinado.'},
+          ].map((step, index) => <li key={step.title} className="min-w-0 rounded-xl border border-white/15 p-5">
+            <span className="text-sm font-bold text-primary">{String(index + 1).padStart(2, '0')}</span>
+            <h3 className="mt-3 text-xl font-bold">{step.title}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-white/70">{step.description}</p>
+          </li>)}
+        </ol>
+        <Button asChild size="lg" className="brand-cta mt-8"><Link to="/briefing">Começar meu briefing<ArrowUpRight size={18} aria-hidden="true"/></Link></Button>
+      </section>
     </div>
   </PublicShell>;
 }
