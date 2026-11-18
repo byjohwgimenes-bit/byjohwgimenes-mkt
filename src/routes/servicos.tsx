@@ -60,7 +60,8 @@ const serviceDescriptions: Record<string, { intro: string; items: string[] }> = 
       "Sua oferta em destaque para quem busca soluções como a sua. Estruturo campanhas no Google Ads com foco em tráfego qualificado, alinhadas aos objetivos e ao investimento disponível para o projeto.",
     items: [
       "Criação de campanhas de anúncios no Google.",
-      "Acompanhamento básico do desempenho dos anúncios.",
+      "Acompanhamento do desempenho dos anúncios.",
+      "Definição de estratégias e formatos de campanha conforme os objetivos, o público e o investimento da sua empresa.",
     ],
   },
 };
