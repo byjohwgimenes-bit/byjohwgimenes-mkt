@@ -268,4 +268,9 @@ a, button { transition: color .18s ease, background-color .18s ease; }
   color: #FFFFFF;
   background: #000000;
 }
-.brand-contact-shell > footer img { filter: brightness(0) invert(1); }
+.brand-contact-shell footer > div > div:first-child > img {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  filter: brightness(0) invert(1);
+}
