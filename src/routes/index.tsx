@@ -2,6 +2,7 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { ArrowUpRight, Fingerprint, Video, Layers } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PublicShell } from '@/components/PublicShell';
+import { HeroPortrait } from '@/components/HeroPortrait';
 export const Route=createFileRoute('/')({head:()=>({meta:[{title:'ByJohwGimenes. — Design que inspira. Ideias que conectam.'},{name:'description',content:'Johw: branding, estratégia digital, conteúdo e audiovisual. Conheça sua trajetória e converse sobre seu projeto.'},{property:'og:title',content:'ByJohwGimenes. — Design que inspira. Ideias que conectam.'},{property:'og:description',content:'Identidade visual, estratégia digital e conteúdo com Johw.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'}]}),component:Index});
 function Index() {
   const services = [
@@ -26,11 +27,7 @@ function Index() {
           <Link className="brand-text-link" to="/servicos">Conhecer serviços <ArrowUpRight size={17}/></Link>
         </div>
         </div>
-        <div className="brand-work-composition" aria-label="Trabalhos de identidade visual">
-          <div className="brand-orbit" aria-hidden="true"/>
-          <Link to="/servicos" className="brand-work brand-work-first" aria-label="Conhecer o projeto Conceito Futsal"><img src="/portfolio-pages/conceito-futsal/1.jpg" alt="Painel original de identidade visual Conceito Futsal" decoding="async"/></Link>
-          <Link to="/servicos" className="brand-work brand-work-second" aria-label="Conhecer o projeto K-Insights"><img src="/portfolio-pages/k-insights/1.jpg" alt="Painel original de identidade visual K-Insights" decoding="async"/></Link>
-        </div>
+        <HeroPortrait />
         <div className="brand-trust">
           <p className="brand-trust-label">Marcas que confiam<br className="brand-trust-break"/> no meu trabalho</p>
           <div className="brand-trust-logos">{brands.map(brand => <Link key={brand.image} to={brand.to} className="brand-logo-plate" title={brand.name}><img src={`/clientes/${brand.image}.png`} alt={brand.name} loading="lazy" decoding="async"/></Link>)}</div>
