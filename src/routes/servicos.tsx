@@ -26,6 +26,14 @@ export const Route = createFileRoute("/servicos")({
   }),
   component: ServicesPage,
 });
+const additionalDescriptions: Record<string, string> = {
+  [SERVICES[2]]:
+    "Crio conteúdo para feed, stories, carrosséis e Reels, conectando a mensagem da marca aos interesses do público e aos objetivos da comunicação.",
+  [SERVICES[7]]:
+    "Edito imagens para que os materiais da sua marca tenham uma apresentação consistente e adequada aos canais em que serão utilizados.",
+  [SERVICES[8]]:
+    "Planejo e gerencio anúncios no Instagram e no Facebook para aproximar sua oferta do público desejado, de acordo com os objetivos e a verba de cada projeto.",
+};
 const serviceDescriptions: Record<string, { intro: string; items: string[] }> = {
   [SERVICES[3]]: {
     intro:
@@ -80,12 +88,12 @@ function ServicesPage() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h2 className="min-w-0 flex-1 text-lg font-bold">{s}</h2>
-                  <span className="text-sm font-semibold text-primary">Conhecer o serviço</span>
-                </summary>
-                <div className="max-w-3xl pb-8">
-                  <p className="leading-relaxed text-muted-foreground">
+                  <span className="text-sm font-semibold text-primary">Ver entregas</span>
+                  <p className="basis-full max-w-3xl text-base font-normal leading-relaxed text-muted-foreground">
                     {serviceDescriptions[s].intro}
                   </p>
+                </summary>
+                <div className="max-w-3xl pb-8">
                   <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
                     {serviceDescriptions[s].items.map((item) => (
                       <li key={item}>{item}</li>
@@ -103,11 +111,14 @@ function ServicesPage() {
                 </div>
               </details>
             ) : (
-              <div key={s} className="flex items-center gap-5 border-t py-6">
+              <div key={s} className="flex flex-wrap items-center gap-5 border-t py-6">
                 <span className="text-sm font-bold text-primary">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h2 className="text-lg font-bold">{s}</h2>
+                <p className="basis-full max-w-3xl leading-relaxed text-muted-foreground">
+                  {additionalDescriptions[s]}
+                </p>
               </div>
             ),
           )}

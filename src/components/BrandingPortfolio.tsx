@@ -23,6 +23,10 @@ export function BrandingPortfolio({ number }: { number: string }) {
             aria-hidden="true"
           />
         </span>
+        <p className="basis-full max-w-3xl text-base font-normal leading-relaxed text-muted-foreground">
+          Crio identidades visuais que traduzem a essência do negócio: logotipo, cores, tipografia,
+          elementos gráficos e manual da marca, conforme o projeto.
+        </p>
       </summary>
       {open && (
         <div className="pb-10">

@@ -58,6 +58,10 @@ export function SocialPortfolio({ number }: { number: string }) {
             aria-hidden="true"
           />
         </span>
+        <p className="basis-full max-w-3xl text-base font-normal leading-relaxed text-muted-foreground">
+          Organizo a apresentação do seu perfil e cuido da gestão contínua das redes, com
+          planejamento, criação de conteúdo, agendamento e acompanhamento.
+        </p>
       </summary>
       {open && (
         <div className="pb-10">

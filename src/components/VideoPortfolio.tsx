@@ -176,6 +176,11 @@ export function VideoPortfolio({
             aria-hidden="true"
           />
         </span>
+        <p className="basis-full max-w-3xl text-base font-normal leading-relaxed text-muted-foreground">
+          {editing
+            ? "Transformo gravações em vídeos com ritmo, clareza e identidade, com cortes, trilha sonora, textos e efeitos alinhados à sua marca."
+            : "Da ideia à finalização: roteiro, direção, captação e edição de Reels e vídeos institucionais, comerciais e promocionais para sua marca."}
+        </p>
       </summary>
       {open && (
         <div className="pb-10">
