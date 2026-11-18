@@ -6,6 +6,8 @@ import { SERVICES } from "@/lib/briefing";
 import { BrandingPortfolio } from "@/components/BrandingPortfolio";
 import { SocialPortfolio } from "@/components/SocialPortfolio";
 import { VideoPortfolio } from "@/components/VideoPortfolio";
+import { SocialDesignGallery } from "@/components/SocialDesignGallery";
+
 export const Route = createFileRoute("/servicos")({
   head: () => ({
     meta: [
@@ -93,7 +95,7 @@ function ServicesPage() {
                     {serviceDescriptions[s].intro}
                   </p>
                 </summary>
-                <div className="max-w-3xl pb-8">
+                <div className="pb-8">
                   <ul className="mt-4 list-disc space-y-2 pl-5 text-muted-foreground">
                     {serviceDescriptions[s].items.map((item) => (
                       <li key={item}>{item}</li>
@@ -102,6 +104,7 @@ function ServicesPage() {
                   <p className="mt-4 text-sm text-muted-foreground">
                     As entregas são definidas conforme a necessidade e o escopo de cada projeto.
                   </p>
+                  {s === SERVICES[3] && <SocialDesignGallery />}
                   <Button asChild className="mt-6">
                     <Link to="/briefing">
                       Quero esse serviço
@@ -119,6 +122,7 @@ function ServicesPage() {
                 <p className="basis-full max-w-3xl leading-relaxed text-muted-foreground">
                   {additionalDescriptions[s]}
                 </p>
+                {s === SERVICES[2] && <SocialDesignGallery />}
               </div>
             ),
           )}

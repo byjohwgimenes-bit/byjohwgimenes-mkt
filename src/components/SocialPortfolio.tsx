@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { SocialDesignGallery } from "@/components/SocialDesignGallery";
+
 const profiles = [
   {
     name: "Najar Imóveis",
@@ -95,6 +97,7 @@ export function SocialPortfolio({ number }: { number: string }) {
               </ul>
             </section>
           </div>
+          <SocialDesignGallery />
           <h3 className="mb-3 text-lg font-bold">Perfis do portfólio</h3>
           <p className="mb-6 max-w-2xl leading-relaxed text-muted-foreground">
             Conheça alguns perfis com os quais trabalho ou já trabalhei e veja os conteúdos
