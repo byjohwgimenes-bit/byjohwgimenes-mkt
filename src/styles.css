@@ -167,8 +167,8 @@ a, button { transition: color .18s ease, background-color .18s ease; }
 }
 .brand-home-shell > header { background: transparent; border-color: var(--home-line); }
 .brand-home-shell > header > div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; padding-top: 24px; padding-bottom: 24px; align-items: center; }
-.brand-home-shell header a[aria-label] { width: fit-content; max-width: 100%; padding: 10px 14px; background: var(--background); border-radius: 4px; }
-.brand-home-shell header img { width: 210px; max-height: 34px; max-width: 100%; }
+.brand-home-shell header a[aria-label] { width: fit-content; max-width: 100%; padding: 0; background: transparent; border-radius: 0; }
+.brand-home-shell header img { width: 210px; max-height: 34px; max-width: 100%; filter: brightness(0) invert(1); }
 .brand-home-shell header nav { min-width: 0; }
 .brand-home-shell header .text-primary { color: var(--primary); }
 .brand-home-shell a:focus-visible { outline-color: var(--primary); }
