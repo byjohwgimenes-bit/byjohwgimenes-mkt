@@ -122,6 +122,21 @@ function ServicesPage() {
                     As entregas são definidas conforme a necessidade e o escopo de cada projeto.
                   </p>
                   {s === SERVICES[3] && <SocialDesignGallery />}
+                  {s === SERVICES[4] && (
+                    <article className="mt-6 max-w-2xl overflow-hidden rounded-xl border bg-card">
+                      <div className="flex h-36 items-center justify-center bg-black p-5">
+                        <img src="/clientes/najar-imoveis.png" alt="Najar Imóveis" width={1536} height={1536} loading="lazy" decoding="async" className="h-full w-full object-contain" />
+                      </div>
+                      <div className="p-5">
+                        <p className="text-xs font-bold uppercase tracking-wider text-primary">Exemplo do portfólio</p>
+                        <h3 className="mt-2 text-xl font-bold">Najar Imóveis no Google</h3>
+                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Conheça o Perfil da Empresa da Najar Imóveis no Google e veja um exemplo da presença digital trabalhada por Johw.</p>
+                        <Button asChild variant="outline" className="mt-5">
+                          <a href="https://www.google.com/search?sca_esv=584265682&sxsrf=AM9HkKkXsv2asRbRYUy1BOgmjTpXfF0WBg%3A1700568049365&q=Roberto%20Najar%20Im%C3%B3veis&stick=H4sIAAAAAAAAAONgU1I1qLA0SU5JsTBONUtJNjGxMLG0MqgwTE5KMzJLSTI2SrEwN0w2W8QqFpSflFpUkq_gl5iVWKTgmXt4c1lqZjEAbPdsjkIAAAA&mat=CXztsALVW0ek&ved=2ahUKEwiEqP7ThdWCAxWJqZUCHXloBnkQrMcEegQICBAH" target="_blank" rel="noopener noreferrer" aria-label="Ver perfil da Najar Imóveis no Google (nova aba)">Ver perfil no Google<ArrowUpRight aria-hidden="true" /></a>
+                        </Button>
+                      </div>
+                    </article>
+                  )}
                   <Button asChild className="mt-6">
                     <Link to="/briefing">
                       Quero esse serviço
