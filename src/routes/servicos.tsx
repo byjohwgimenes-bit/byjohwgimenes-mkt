@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { PublicShell } from "@/components/PublicShell";
 import { Button } from "@/components/ui/button";
 import { SERVICES } from "@/lib/briefing";
@@ -83,6 +83,23 @@ function ServicesPage() {
                 title={s}
                 editing={s === SERVICES[6]}
               />
+            ) : s === SERVICES[2] ? (
+              <details key={s} className="group/content border-t">
+                <summary className="flex cursor-pointer list-none flex-wrap items-center gap-5 py-6 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4 [&::-webkit-details-marker]:hidden">
+                  <span className="text-sm font-bold text-primary">{String(i + 1).padStart(2, "0")}</span>
+                  <h2 className="min-w-0 flex-1 text-lg font-bold">{s}</h2>
+                  <span className="flex items-center gap-2 text-sm font-semibold text-primary">
+                    <span className="group-open/content:hidden">Ver projetos</span>
+                    <span className="hidden group-open/content:inline">Fechar projetos</span>
+                    <ChevronDown className="size-4 transition-transform group-open/content:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
+                  </span>
+                  <p className="basis-full max-w-3xl text-base font-normal leading-relaxed text-muted-foreground">{additionalDescriptions[s]}</p>
+                </summary>
+                <div className="pb-8">
+                  <SocialDesignGallery />
+                  <Button asChild><Link to="/briefing">Quero esse serviço<ArrowUpRight aria-hidden="true" /></Link></Button>
+                </div>
+              </details>
             ) : serviceDescriptions[s] ? (
               <details key={s} className="border-t">
                 <summary className="flex cursor-pointer list-none flex-wrap items-center gap-5 py-6 focus-visible:outline-2 focus-visible:outline-ring focus-visible:outline-offset-4 [&::-webkit-details-marker]:hidden">
@@ -122,7 +139,6 @@ function ServicesPage() {
                 <p className="basis-full max-w-3xl leading-relaxed text-muted-foreground">
                   {additionalDescriptions[s]}
                 </p>
-                {s === SERVICES[2] && <SocialDesignGallery />}
               </div>
             ),
           )}
