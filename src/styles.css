@@ -254,3 +254,18 @@ a, button { transition: color .18s ease, background-color .18s ease; }
  .brand-work-first:hover { transform: rotate(-11deg); }
  .brand-work-second:hover { transform: rotate(12deg); }
 }
+
+/* Contact shares the white header logo with home, with a solid black surface. */
+.brand-contact-shell {
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --muted-foreground: #BDBDBD;
+  --border: #333333;
+  --input: #333333;
+  --accent: #222222;
+  --accent-foreground: #FFFFFF;
+  --home-line: #333333;
+  color: #FFFFFF;
+  background: #000000;
+}
+.brand-contact-shell > footer img { filter: brightness(0) invert(1); }
