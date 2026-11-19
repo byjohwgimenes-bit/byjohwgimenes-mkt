@@ -7,8 +7,10 @@ export function HeroPortrait() {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1));
     const y = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1));
-    event.currentTarget.style.setProperty('--portrait-rx', `${-y * 4}deg`);
-    event.currentTarget.style.setProperty('--portrait-ry', `${x * 4}deg`);
+    event.currentTarget.style.setProperty('--portrait-glow-x', `${(x + 1) * 50}%`);
+    event.currentTarget.style.setProperty('--portrait-glow-y', `${(y + 1) * 50}%`);
+    event.currentTarget.style.setProperty('--portrait-rx', `${-y * 8}deg`);
+    event.currentTarget.style.setProperty('--portrait-ry', `${x * 8}deg`);
   };
   const reset = (event: PointerEvent<HTMLAnchorElement>) => {
     event.currentTarget.style.setProperty('--portrait-rx', '0deg');
