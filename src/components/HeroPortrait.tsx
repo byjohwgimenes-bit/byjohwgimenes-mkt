@@ -17,7 +17,7 @@ export function HeroPortrait() {
   return <Link to="/sobre-mim" className="brand-portrait" aria-label="Conhecer Johw e sua trajetória em marketing" onPointerMove={move} onPointerLeave={reset} onPointerCancel={reset}>
     <span className="brand-portrait-glow" aria-hidden="true" />
     <span className="brand-portrait-art">
-      <img src="/images/johw-marketing.png" alt="Johw com jaqueta vermelha e notebook, em composição com o símbolo branco da ByJohwGimenes." width={1638} height={2048} decoding="async" fetchPriority="high" draggable={false} />
+      <img src="/images/johw-marketing.png?v=20261119" alt="Retrato de Johw com camiseta preta e iluminação vermelha, em composição com o símbolo branco da ByJohwGimenes." width={1638} height={2048} decoding="async" fetchPriority="high" draggable={false} />
     </span>
     <span className="brand-portrait-caption">Conheça quem está por trás da marca <span aria-hidden="true">↗</span></span>
   </Link>;
