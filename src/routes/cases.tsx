@@ -3,4 +3,36 @@ import { PublicShell } from '@/components/PublicShell';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight } from 'lucide-react';
 export const Route=createFileRoute('/cases')({head:()=>({meta:[{title:'Cases — ByJohwGimenes.'},{name:'description',content:'Conheça a trajetória de criação visual e marketing de Johw com Najar Imóveis.'},{property:'og:title',content:'Cases — ByJohwGimenes.'},{property:'og:description',content:'Projetos de marca, conteúdo e estratégia digital.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary'}]}),component:Cases});
-function Cases(){return <PublicShell><section className="mx-auto max-w-6xl px-5 py-16"><p className="text-sm font-bold text-primary">TRABALHO EM CONTEXTO</p><h1 className="mt-5 text-5xl font-bold sm:text-7xl">Cases</h1><article className="mt-12 max-w-2xl rounded-lg border bg-card p-8"><p className="text-xs text-primary">MARKETING · CRIAÇÃO VISUAL</p><h2 className="mt-4 text-3xl font-bold">Najar Imóveis</h2><p className="mt-4 leading-relaxed text-muted-foreground">Estratégia de marketing e criação visual nas redes sociais desde agosto de 2022.</p><Button asChild variant="outline" className="mt-7"><Link to="/cases/najar-imoveis">Conhecer o case<ArrowUpRight/></Link></Button></article></section></PublicShell>}
+function Cases() {
+  return (
+    <PublicShell>
+      <section className="mx-auto max-w-6xl px-5 py-16">
+        <p className="text-sm font-bold text-primary">TRABALHO EM CONTEXTO</p>
+        <h1 className="mt-5 text-5xl font-bold sm:text-7xl">Cases</h1>
+        <article className="mt-12 grid items-center gap-8 rounded-lg border bg-card p-5 sm:p-8 md:grid-cols-2">
+          <div>
+            <p className="text-xs text-primary">MARKETING · CRIAÇÃO VISUAL</p>
+            <h2 className="mt-4 text-3xl font-bold">Najar Imóveis</h2>
+            <p className="mt-4 leading-relaxed text-muted-foreground">
+              Estratégia de marketing e criação visual nas redes sociais desde agosto de 2022.
+            </p>
+            <Button asChild variant="outline" className="mt-7">
+              <Link to="/cases/najar-imoveis">
+                Conhecer o case
+                <ArrowUpRight />
+              </Link>
+            </Button>
+          </div>
+          <img
+            src="/images/najar-case.png"
+            alt="Perfil da Najar Imóveis no Instagram e exemplos de peças para redes sociais"
+            width={1250}
+            height={1250}
+            className="mx-auto h-auto w-full max-w-md object-contain"
+            decoding="async"
+          />
+        </article>
+      </section>
+    </PublicShell>
+  );
+}
