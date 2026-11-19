@@ -307,3 +307,6 @@ a, button { transition: color .18s ease, background-color .18s ease; }
   .brand-portrait:focus-visible .brand-portrait-art { transform: translateY(-6px) scale(1.025); }
 }
 .brand-portrait:hover .brand-portrait-caption, .brand-portrait:focus-visible .brand-portrait-caption { color: #FF3131; }
+
+/* Sobre mim: retrato transparente, sem caixa de fundo, integrado ao fundo da página */
+.about-portrait { aspect-ratio: 0.53; }
