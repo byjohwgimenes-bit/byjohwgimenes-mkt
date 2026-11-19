@@ -1,11 +1,13 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import aboutPortrait from '@/assets/sobre-mim-transparente.png.asset.json';
 
-describe('About page portrait asset', () => {
-  it('points at the exact attached transparent PNG as a permanent asset', () => {
-    expect(aboutPortrait.original_filename).toBe('sobre-mim-transparente.png');
-    expect(aboutPortrait.content_type).toBe('image/png');
-    expect(aboutPortrait.size).toBe(1768291);
-    expect(aboutPortrait.url).toMatch(/^\/__l5e\/assets-v1\/[^/]+\/sobre-mim-transparente\.png$/);
+describe('Public portrait assets', () => {
+  it.each([
+    ['src/routes/sobre-mim.tsx', '/images/johw-sobre-mim.webp'],
+    ['src/components/HeroPortrait.tsx', '/images/johw-marketing.png?v=20261119'],
+  ])('serves the portrait in %s from the deployable public directory', (file, url) => {
+    expect(readFileSync(resolve(file), 'utf8')).toContain(`src="${url}"`);
+    expect(existsSync(resolve(`public${url.split("?")[0]}`))).toBe(true);
   });
 });
