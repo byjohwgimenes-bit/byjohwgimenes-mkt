@@ -275,38 +275,26 @@ a, button { transition: color .18s ease, background-color .18s ease; }
   filter: brightness(0) invert(1);
 }
 
-/* Supplied transparent portrait: pointer motion stays inside the home hero. */
-.brand-portrait { position: relative; display: block; width: 100%; max-width: 500px; aspect-ratio: .92; justify-self: center; isolation: isolate; border-radius: 20px; }
-.brand-portrait-glow { position: absolute; inset: 22% 4% 7%; z-index: -1; background: radial-gradient(ellipse, #FF313124, transparent 70%); pointer-events: none; }
-.brand-portrait-art { display: block; position: absolute; inset: 0; overflow: hidden; border-radius: 20px; transform: perspective(1000px) rotateX(var(--portrait-rx, 0deg)) rotateY(var(--portrait-ry, 0deg)); transition: transform .18s ease-out; }
-.brand-portrait-art img { position: absolute; width: 136%; max-width: none; height: auto; left: -18%; top: -35%; user-select: none; pointer-events: none; }
-.brand-portrait-caption { position: absolute; bottom: -16px; left: 0; right: 0; text-align: center; font-size: 12px; color: #EBEBEB; }
+/* Keep the full portrait visible as it follows the pointer. */
+.brand-portrait { display: grid; width: 100%; max-width: 500px; gap: 12px; justify-self: center; border-radius: 20px; }
+.brand-portrait-art { position: relative; display: block; aspect-ratio: 1202 / 1218; transform: perspective(900px) rotateX(var(--portrait-rx, 0deg)) rotateY(var(--portrait-ry, 0deg)); transition: transform .18s ease-out; }
+/* Position the PNG by the bounds of its visible pixels, excluding transparent padding. */
+.brand-portrait-art img { position: absolute; width: calc(1638 / 1202 * 100%); max-width: none; left: calc(-212 / 1202 * 100%); top: calc(-505 / 1218 * 100%); height: auto; user-select: none; pointer-events: none; transition: filter .2s ease; }
+.brand-portrait-caption { position: relative; text-align: center; font-size: 12px; color: #EBEBEB; transition: color .2s ease; }
 .brand-portrait-caption span { color: #FF3131; margin-left: 4px; }
 .brand-portrait:focus-visible { outline: 2px solid #FF3131; outline-offset: 8px; }
+.brand-portrait:focus-visible img { filter: drop-shadow(0 0 9px #FF313180); }
+.brand-portrait:focus-visible .brand-portrait-caption { color: #FF3131; }
 @media (hover: hover) and (pointer: fine) {
-  .brand-portrait:hover .brand-portrait-glow { background: radial-gradient(ellipse, #FF313138, transparent 72%); }
+  .brand-portrait:hover img { filter: drop-shadow(0 0 9px #FF313180); }
+  .brand-portrait:hover .brand-portrait-caption { color: #FF3131; }
 }
 @media (max-width: 640px) {
-  .brand-portrait { max-width: 390px; margin-bottom: 20px; }
+  .brand-portrait { max-width: 390px; }
 }
 @media (prefers-reduced-motion: reduce), (hover: none) {
   .brand-portrait-art { transform: none; transition: none; }
 }
-
-/* Stronger hover response for the new portrait; touch and reduced motion stay stable. */
-.brand-portrait-glow { transition: opacity .25s ease; }
-.brand-portrait-caption { transition: color .2s ease; }
-@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .brand-portrait:hover .brand-portrait-art {
-    transform: perspective(900px) rotateX(var(--portrait-rx, 0deg)) rotateY(var(--portrait-ry, 0deg)) translateY(-6px) scale(1.025);
-    filter: drop-shadow(0 8px 20px #FF313130);
-  }
-  .brand-portrait:hover .brand-portrait-glow {
-    background: radial-gradient(ellipse at var(--portrait-glow-x, 50%) var(--portrait-glow-y, 50%), #FF313155, transparent 72%);
-  }
-  .brand-portrait:focus-visible .brand-portrait-art { transform: translateY(-6px) scale(1.025); }
+@media (prefers-reduced-motion: reduce) {
+  .brand-portrait-art img, .brand-portrait-caption { transition: none; }
 }
-.brand-portrait:hover .brand-portrait-caption, .brand-portrait:focus-visible .brand-portrait-caption { color: #FF3131; }
-
-/* Sobre mim: retrato transparente, sem caixa de fundo, integrado ao fundo da página */
-.about-portrait { aspect-ratio: 0.53; }

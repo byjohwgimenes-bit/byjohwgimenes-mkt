@@ -7,8 +7,6 @@ export function HeroPortrait() {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1));
     const y = Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1));
-    event.currentTarget.style.setProperty('--portrait-glow-x', `${(x + 1) * 50}%`);
-    event.currentTarget.style.setProperty('--portrait-glow-y', `${(y + 1) * 50}%`);
     event.currentTarget.style.setProperty('--portrait-rx', `${-y * 8}deg`);
     event.currentTarget.style.setProperty('--portrait-ry', `${x * 8}deg`);
   };
@@ -17,7 +15,6 @@ export function HeroPortrait() {
     event.currentTarget.style.setProperty('--portrait-ry', '0deg');
   };
   return <Link to="/sobre-mim" className="brand-portrait" aria-label="Conhecer Johw e sua trajetória em marketing" onPointerMove={move} onPointerLeave={reset} onPointerCancel={reset}>
-    <span className="brand-portrait-glow" aria-hidden="true" />
     <span className="brand-portrait-art">
       <img src="/images/johw-marketing.png?v=20261119" alt="Retrato de Johw com camiseta preta e iluminação vermelha, em composição com o símbolo branco da ByJohwGimenes." width={1638} height={2048} decoding="async" fetchPriority="high" draggable={false} />
     </span>
