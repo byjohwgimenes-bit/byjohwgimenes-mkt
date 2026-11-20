@@ -18,6 +18,7 @@
 - WhatsApp links are built only via `src/lib/whatsapp.ts`, which returns null without a valid configured number. Why: never show a broken or invented contact.
 
 - New briefings live in an additive private table with admin-only RLS; the narrow public server function validates and writes without exposing a read endpoint. Why: preserve legacy records and prevent public response access.
+- External hosting forwards briefings only to the fixed Lovable-hosted TanStack receiver using timestamped body HMAC; privileged writes stay in Cloud and both paths share validation and retry matching. Why: Netlify cannot obtain managed database credentials, and new Edge Functions are unsupported in this stack.
 - Submission UUIDs are retry keys, never public lookup keys; retries return only the reference after matching the full validated payload. Why: prevent duplicates without leaking another submission.
 - Briefing schema and conditional field definitions are shared by form, server and admin/PDF views. Why: validation and exported answers stay consistent.
 - PDF exports run client-side after admin RLS reads with an embedded Unicode font and omit internal notes. Why: selectable accented text without a public document endpoint.

@@ -17,6 +17,7 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SobreMimRouteImport } from './routes/sobre-mim'
 import { Route as CasesNajarImoveisRouteImport } from './routes/cases_.najar-imoveis'
+import { Route as ApiPublicBriefingSubmissionRouteImport } from './routes/api/public/briefing-submission'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +59,12 @@ const CasesNajarImoveisRoute = CasesNajarImoveisRouteImport.update({
   path: '/cases/najar-imoveis',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicBriefingSubmissionRoute =
+  ApiPublicBriefingSubmissionRouteImport.update({
+    id: '/api/public/briefing-submission',
+    path: '/api/public/briefing-submission',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRoute
   '/sobre-mim': typeof SobreMimRoute
   '/cases/najar-imoveis': typeof CasesNajarImoveisRoute
+  '/api/public/briefing-submission': typeof ApiPublicBriefingSubmissionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +86,7 @@ export interface FileRoutesByTo {
   '/servicos': typeof ServicosRoute
   '/sobre-mim': typeof SobreMimRoute
   '/cases/najar-imoveis': typeof CasesNajarImoveisRoute
+  '/api/public/briefing-submission': typeof ApiPublicBriefingSubmissionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +98,7 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRoute
   '/sobre-mim': typeof SobreMimRoute
   '/cases_/najar-imoveis': typeof CasesNajarImoveisRoute
+  '/api/public/briefing-submission': typeof ApiPublicBriefingSubmissionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre-mim'
     | '/cases/najar-imoveis'
+    | '/api/public/briefing-submission'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre-mim'
     | '/cases/najar-imoveis'
+    | '/api/public/briefing-submission'
   id:
     | '__root__'
     | '/'
@@ -121,6 +133,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre-mim'
     | '/cases_/najar-imoveis'
+    | '/api/public/briefing-submission'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +145,7 @@ export interface RootRouteChildren {
   ServicosRoute: typeof ServicosRoute
   SobreMimRoute: typeof SobreMimRoute
   CasesNajarImoveisRoute: typeof CasesNajarImoveisRoute
+  ApiPublicBriefingSubmissionRoute: typeof ApiPublicBriefingSubmissionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -192,6 +206,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CasesNajarImoveisRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/briefing-submission': {
+      id: '/api/public/briefing-submission'
+      path: '/api/public/briefing-submission'
+      fullPath: '/api/public/briefing-submission'
+      preLoaderRoute: typeof ApiPublicBriefingSubmissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -204,6 +225,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosRoute: ServicosRoute,
   SobreMimRoute: SobreMimRoute,
   CasesNajarImoveisRoute: CasesNajarImoveisRoute,
+  ApiPublicBriefingSubmissionRoute: ApiPublicBriefingSubmissionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

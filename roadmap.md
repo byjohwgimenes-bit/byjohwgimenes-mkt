@@ -1,4 +1,5 @@
 # Atualização consolidada ByJohwGimenes.
+- [ ] Corrigir somente submissão Netlify → Lovable com endpoint assinado e testes sem banco; ativação aguarda segredo compartilhado e publicações manuais.
 - [x] Redesenhar somente home conforme referência escura, dois trabalhos reais e cinco marcas; screenshots desktop/320/390, imagens, links, teclado, movimento reduzido e 28 testes OK; build OK, sem publicar.
 - [x] Simplificar home em três blocos e reforçar títulos/menu públicos; screenshots em 1280px, 390px e 320px, links verificados, 28 testes e build OK; sem publicar.
 - [ ] Corrigir e testar leitor interno dos seis projetos de branding, navegação, zoom e celular; sem publicar.

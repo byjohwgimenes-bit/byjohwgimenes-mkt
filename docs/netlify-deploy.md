@@ -18,11 +18,20 @@ No painel Netlify, configure as variáveis antes do deploy:
 | --- | --- | --- |
 | VITE_SUPABASE_URL | Build | Valor público do .env do projeto |
 | VITE_SUPABASE_PUBLISHABLE_KEY | Build | Chave pública/publishable do .env |
-| SUPABASE_URL | Build e Functions | URL do backend acessível externamente; mesma configuração do projeto |
-| SUPABASE_PUBLISHABLE_KEY | Build e Functions | Chave pública/publishable do projeto |
-| SUPABASE_SERVICE_ROLE_KEY | Functions, segredo | Chave de serviço do mesmo backend, obtida de forma segura pelo proprietário |
+| BRIEFING_SUBMISSION_MODE | Functions | `relay` |
+| BRIEFING_RELAY_SECRET | Functions, segredo | Mesmo segredo dedicado cadastrado no Lovable; nunca prefixar com VITE_ |
 
-A função de envio do briefing usa SUPABASE_SERVICE_ROLE_KEY para uma inserção validada. Sem essa variável secreta o site pode abrir e o admin pode autenticar, mas o formulário não vai salvar. Essa chave não está no repositório. Não usar prefixo VITE_ para ela, não colar em chat/prints e nunca versioná-la. Se o backend gerenciado não disponibilizar exportação segura dessa chave, resolver isso no painel/suporte antes de considerar o briefing funcional. Não trocar de banco nem criar outro projeto para contornar essa etapa.
+A função da Netlify encaminha somente briefings validados por HTTPS para o endpoint fixo `https://byjohwgimenes-mkt.lovable.app/api/public/briefing-submission`. A chave privilegiada do banco permanece exclusivamente no Lovable Cloud; ela não está disponível para exportação e não deve ser solicitada ou cadastrada na Netlify. Login, formulário, tabelas e RLS não mudam.
+
+### Ativação manual do envio (ainda pendente)
+1. Antes de sincronizar commits, pause o deploy automático da main na Netlify se não quiser publicar o site. Commits podem disparar um deploy; este trabalho não executa publicação nem muda a configuração da Netlify.
+2. Crie um segredo dedicado forte em seu gerenciador de senhas (pelo menos 32 caracteres), sem enviá-lo no chat. Cadastre o mesmo valor como `BRIEFING_RELAY_SECRET` em Project Settings → Secrets no Lovable e nas variáveis da Netlify, escopo Functions. Não reutilize chaves de banco ou outros segredos.
+3. Na Netlify, cadastre `BRIEFING_SUBMISSION_MODE=relay` no escopo Functions. No Lovable, não configure esse modo como relay.
+4. Publique manualmente a versão Lovable para disponibilizar o receptor; novas Edge Functions não são suportadas neste projeto TanStack, por isso o receptor é uma rota de servidor hospedada no Lovable. O endpoint não existe na versão publicada anterior (GET retornou 404 durante o diagnóstico).
+5. Confirme sem gravar dados: GET no endpoint deve retornar 405, e POST sem assinatura deve retornar 401 após o segredo ser configurado. Sem configuração o receptor falha fechado com 503. Esses probes não inserem registros.
+6. Só depois faça o deploy manual da Netlify com os segredos no runtime. O servidor assina método, caminho, horário e corpo; o receptor aceita assinatura HMAC válida por cinco minutos e devolve somente referência. Timeout de dez segundos e limite de 64 KiB; redirects são recusados. Em falha, as respostas e submission_key ficam no formulário para nova tentativa, sem confirmação falsa.
+
+A origem acima foi confirmada por `project_urls.get_urls`, não inferida a partir do domínio da Netlify. A rota é criada neste código e exige publicação Lovable para existir em produção. Nenhum registro de produção foi criado no diagnóstico. Testes locais usam armazenamento e transporte em memória. A validação real entre as duas hospedagens continua pendente; não realizar submissões reais sem autorização.
 
 Não copiar URLs internas de sandbox para a Netlify. Conferir acesso externo ao backend real e nunca substituir automaticamente URLs/chaves ou reduzir RLS.
 
